@@ -1,0 +1,21 @@
+name: SmartCheck Audit
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Install SmartCheck
+        run: docker pull trailofbits/smartcheck:latest
+      - name: Run SmartCheck analysis
+        run: docker run --rm -v $(pwd):/code trailofbits/smartcheck:latest -s /code/contracts -o /code/report.html
+      - name: Upload report
+        uses: actions/upload-artifact@v2
+        with:
+          name: smartcheck-report
+          path: report.html
