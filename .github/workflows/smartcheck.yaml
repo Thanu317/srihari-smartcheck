@@ -1,24 +1,23 @@
-name: SmartCheck CI
+name: SmartCheck Analysis
 
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+on: [push]
 
 jobs:
-  build:
+  analysis:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-    - name: Install SmartCheck
+    - name: Install dependencies
       run: |
-        curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+        sudo apt-get update
+        sudo apt-get install -y openjdk-8-jdk
+        curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
         sudo apt-get install -y nodejs
         sudo npm install -g smartcheck
 
-    - name: Run SmartCheck
-      run: smartcheck -p .
-
+    - name: Run SmartCheck analysis
+      run: |
+        smartcheck -p .
