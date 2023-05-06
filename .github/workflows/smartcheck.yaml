@@ -20,4 +20,4 @@ jobs:
         run: npm install @smartdec/smartcheck -g
           
       - name: Run SmartCheck
-        run: smartcheck -p contracts/dummy.sol
+        run: smartcheck contracts/dummy.sol
