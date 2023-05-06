@@ -13,13 +13,13 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Pull SmartCheck Docker image
-        uses: docker://smartbugs/smartcheck:2.2.3
+        uses: docker://smartbugs/smartcheck:latest
 
       - name: Run SmartCheck
         run: |
           docker run --rm \
             -v $(pwd):/code \
-            smartbugs/smartcheck:2.2.3 \
+            smartbugs/smartcheck:latest \
             -s /code/contracts \
             -o /code/report.html
 
