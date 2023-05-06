@@ -11,9 +11,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Install SmartCheck
-        run: docker pull trailofbits/smartcheck:latest
+        run: docker pull smartbugs/smartcheck
       - name: Run SmartCheck analysis
-        run: docker run --rm -v $(pwd):/code trailofbits/smartcheck:latest -s /code/contracts -o /code/report.html
+        run: docker run --rm -v $(pwd):/code smartbugs/smartcheck:latest -s /code/contracts -o /code/report.html
       - name: Upload report
         uses: actions/upload-artifact@v2
         with:
