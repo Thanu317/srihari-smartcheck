@@ -15,10 +15,7 @@ jobs:
       with:
         node-version: '16'
         cache: 'npm'
-
-    - name: Install npm 9.6.6
-      run: npm install -g npm@9.6.6
-
+        
     - name: Install dependencies
       run: |
         sudo apt-get update
