@@ -12,19 +12,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Pull SmartCheck Docker image
-        uses: docker://smartbugs/smartcheck:latest
-
+      - name: Install SmartCheck
+        run: npm install @smartdec/smartcheck -g
+          
       - name: Run SmartCheck
-        run: |
-          docker run --rm \
-            -v $(pwd):/code \
-            smartbugs/smartcheck:latest \
-            -s /code/contracts \
-            -o /code/report.html
-
-      - name: Upload report
-        uses: actions/upload-artifact@v2
-        with:
-          name: SmartCheck Report
-          path: report.html
+        run: smartcheck -p .
