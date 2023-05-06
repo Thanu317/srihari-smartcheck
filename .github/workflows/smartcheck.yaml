@@ -1,28 +1,17 @@
-name: SmartCheck Analysis
+name: SmartCheck Scan
 
-on: [push]
+on:
+  push:
+    branches: [master]
 
 jobs:
-  analysis:
+  scan:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-      
-    - name: Setup Node.js and npm
-      uses: actions/setup-node@v2
-      with:
-        node-version: '16'
-        cache: 'npm'
-        
-    - name: Install dependencies
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y openjdk-8-jdk
-        curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
-        sudo npm install -g smartcheck
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Run SmartCheck analysis
-      run: |
-        smartcheck -p .
+      - name: Run SmartCheck scan
+        uses: docker://smartdec/smartcheck:latest
+        with:
+          args: smartcheck scan -t ${{ secrets.SMARTCHECK_TOKEN }} -p ${{ secrets.SMARTCHECK_PROJECT }} ${{ github.workspace }}
