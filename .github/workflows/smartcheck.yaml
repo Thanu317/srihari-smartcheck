@@ -10,8 +10,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
       - name: Run SmartCheck scan
-        uses: docker://smartdec/smartcheck:latest
-        with:
-          args: smartcheck scan -t ${{ secrets.SMARTCHECK_TOKEN }} -p ${{ secrets.SMARTCHECK_PROJECT }} ${{ github.workspace }}
+        run:  npm install @smartdec/smartcheck -g
+ 
