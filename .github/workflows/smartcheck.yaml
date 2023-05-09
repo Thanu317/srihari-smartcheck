@@ -13,5 +13,5 @@ jobs:
       - name: Run SmartCheck scan
         run:  npm install @smartdec/smartcheck -g
       - name: Run Slither Command
-        run: cd contracts && smartcheck -p .
+        run: smartcheck -p .
  
