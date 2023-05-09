@@ -10,7 +10,13 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Run SmartCheck scan
+      - name: Install Java
+        uses: actions/setup-java@v3
+        with:
+         distribution: 'temurin'
+         java-version: '17'
+         check-latest: true
+      - name: install SmartCheck scan
         run:  npm install @smartdec/smartcheck -g
       - name: Run Slither Command
         run: smartcheck -p .
